@@ -17,3 +17,7 @@ Download data for site_1 to site_5 from:
 
 Download garage (site_6) data from:
 * https://junction-2021.s3.eu-west-1.amazonaws.com/audio_data.zip
+
+Audio files split into smaller chunks:
+* https://drive.google.com/file/d/1iW9JYXyQi-g5JJjqOJ654EkxBdyh4L_W/view?usp=sharing
+
