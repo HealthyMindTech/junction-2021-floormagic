@@ -1,11 +1,3 @@
-// Frank Poth 04/18/2018
-
-/* Changes:
-
-  1. Added the drawing calls for drawing the grass and carrots in render.
-  2. Added a p element for showing the number of carrots collected.
-
-*/
 
 window.addEventListener("load", function(event) {
 
@@ -13,56 +5,40 @@ window.addEventListener("load", function(event) {
 
   //// CONSTANTS ////
 
-  const ZONE_PREFIX = "07/zone";
+  const ZONE_PREFIX = "zone";
   const ZONE_SUFFIX = ".json";
 
-      /////////////////
-    //// CLASSES ////
+  /////////////////
+  //// CLASSES ////
   /////////////////
 
   const AssetsManager = function() {
-
     this.tile_set_image = undefined;
-
   };
 
   AssetsManager.prototype = {
 
     constructor: Game.AssetsManager,
-
     requestJSON:function(url, callback) {
-
       let request = new XMLHttpRequest();
-
       request.addEventListener("load", function(event) {
-
         callback(JSON.parse(this.responseText));
-
       }, { once:true });
-
       request.open("GET", url);
       request.send();
-
     },
 
     requestImage:function(url, callback) {
-
       let image = new Image();
-
       image.addEventListener("load", function(event) {
-
         callback(image);
-
       }, { once:true });
-
       image.src = url;
-
     },
-
   };
 
-      ///////////////////
-    //// FUNCTIONS ////
+  ///////////////////
+  //// FUNCTIONS ////
   ///////////////////
 
   var keyDownUp = function(event) {
@@ -134,30 +110,24 @@ window.addEventListener("load", function(event) {
 
     if (controller.left.active ) { game.world.player.moveLeft ();                               }
     if (controller.right.active) { game.world.player.moveRight();                               }
-    if (controller.up.active   ) { game.world.player.jump();      controller.up.active = false; }
+    if (controller.up.active   ) { game.world.player.moveUp();
+      }
+    if (controller.down.active   ) { game.world.player.moveDown(); }
 
     game.update();
 
     if (game.world.door) {
-
       engine.stop();
-
       assets_manager.requestJSON(ZONE_PREFIX + game.world.door.destination_zone + ZONE_SUFFIX, (zone) => {
-
         game.world.setup(zone);
-
         engine.start();
-
       });
-
       return;
-
     }
-
   };
 
-      /////////////////
-    //// OBJECTS ////
+  /////////////////
+  //// OBJECTS ////
   /////////////////
 
   var assets_manager = new AssetsManager();
@@ -171,8 +141,8 @@ window.addEventListener("load", function(event) {
   p.innerHTML = "Carrots: 0";
   document.body.appendChild(p);
 
-      ////////////////////
-    //// INITIALIZE ////
+  ////////////////////
+  //// INITIALIZE ////
   ////////////////////
 
   display.buffer.canvas.height = game.world.height;
@@ -180,22 +150,15 @@ window.addEventListener("load", function(event) {
   display.buffer.imageSmoothingEnabled = false;
 
   assets_manager.requestJSON(ZONE_PREFIX + game.world.zone_id + ZONE_SUFFIX, (zone) => {
-
     game.world.setup(zone);
-
     assets_manager.requestImage("rabbit-trap.png", (image) => {
-
       assets_manager.tile_set_image = image;
-
       resize();
       engine.start();
-
     });
-
   });
 
   window.addEventListener("keydown", keyDownUp);
   window.addEventListener("keyup"  , keyDownUp);
   window.addEventListener("resize" , resize);
-
 });
