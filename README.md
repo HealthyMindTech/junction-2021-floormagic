@@ -21,3 +21,15 @@ Download garage (site_6) data from:
 Audio files split into smaller chunks:
 * https://drive.google.com/file/d/1iW9JYXyQi-g5JJjqOJ654EkxBdyh4L_W/view?usp=sharing
 
+### Audio files analysis
+
+See file `junction21_aud.ipynb` 
+
+We can identify patterns:
+
+![Alt text](visual/audio_out_carengine.png?raw=true "Title")
+
+![Alt text](visual/audio_out_door.png?raw=true "Title")
+
+![Alt text](visual/audio_out_cardoor.png?raw=true "Title")
+
